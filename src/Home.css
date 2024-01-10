@@ -1,0 +1,40 @@
+.pozadina{
+    height: 700px;
+    background-position: center center;
+    background-size:cover;
+    background-repeat: no-repeat;
+ 
+}
+.container{
+    display: inline-flexbox;
+}
+.coco{
+    display: inline-block;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    margin-left: 50px;
+}
+.card{
+    border: rgb(133, 5, 5);
+    border-radius: 4cm;
+    border-width: 4cap;
+    
+}
+.card-header{
+    background-color: rgb(133, 5, 5)
+}
+#ulaz{
+   
+    display: inline;
+    color: darkred;
+    margin-bottom: 0%;
+     height: 40px;
+    border-width: 4cap;
+    position: left;
+    
+}
+.kol{
+    background-color: darkred;
+}

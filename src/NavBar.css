@@ -1,0 +1,445 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+.lol{
+	background-repeat: no-repeat;
+	
+	background-size: contain;
+	
+	background-image: url("https://w0.peakpx.com/wallpaper/975/363/HD-wallpaper-redden-chess-3d-art-red-black-abstract-chess.jpg");
+}
+
+h1 {
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	margin:0;
+	padding:0;
+	}
+
+hr {
+	border:none;
+	border-top:1px solid #CCCCCC;
+	height:1px;
+	margin-bottom:25px;
+	}
+
+#stylefour{
+	position:relative;
+	display:block;
+	height:39px;
+	font-size:14px;
+	font-weight:bold;
+	background:transparent url(bgOFF.gif) repeat-x top left;
+	font-family:Arial,Verdana,Helvitica,sans-serif;
+	border-top:4px solid #B30000;
+	}
+
+#stylefour ul{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	width:auto;
+	}
+
+#stylefour ul li{
+	display:block;
+	float:left;
+	margin:0;
+	}
+
+#stylefour ul li a{
+	display:block;
+	float:left;
+	color:#666;
+	text-decoration:none;
+	padding:11px 20px 0 20px;
+	height:23px;
+	background:transparent url(bgDIVIDER.gif) no-repeat top right;
+	}
+
+#stylefour ul li a:hover,#stylefour ul li a.current{
+	color:#B30000;
+	background:#fff url(bgON.gif) no-repeat top right;
+	}
+	#title-Tag-Line {
+		font-size: 20px;
+	  }
+	  /* .card-item__bg{
+		width: 150px;
+		margin-left: auto;
+		margin-right: auto;
+		left: 0;
+		right: 0;
+		display: block;
+		position: relative;
+		margin: 30px auto;
+		transform: translate(0px, 50px);
+		z-index: 5;
+	  } */
+	  
+	  /* form animation starts */
+	  .forms {
+		background: #fff;
+		box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+		border-radius: 5px;
+		vertical-align:top;
+		max-width: 490px;
+		margin-left: 800px;
+		margin-top:-800px;
+		margin-right: 45px;
+		padding-top: 5x;
+		padding-bottom: 5px;
+		left: 200;
+		right: 0;
+		position:absolute;
+		border-top: 5px solid #800404;
+		border-left: 5px solid #800404;
+		border-right: 5px solid #800404;
+	  /*   z-index: 1; */
+		animation: bounce 1.5s infinite;
+	  }
+	  ::-webkit-input-placeholder {
+		font-size: 1.3em;
+	  }
+	  
+	  .titles{
+		display: block;
+		font-family: sans-serif;
+		margin: 10px auto 5px;
+		width: 300px;
+	  }
+	  .termsConditions{
+		margin: 0 auto 5px 80px;
+	  }
+	  .rr{
+		font-style: italic;
+		font:12px;
+	  }
+	  a{
+			color:#770303;
+			font-style: normal;
+	  }
+	 
+	  .cardL{
+		background-image: url("https://media.istockphoto.com/id/1154467834/photo/red-king-chess-standing-against-black-background.jpg?s=612x612&w=0&k=20&c=gWxAwEnZOCFzPkLFBomZPu4jvlNxRGYrMUBAZcR5JGk=");
+	  }
+	  
+	  .card-bodyy{
+		background-image: url("https://freedesignfile.com/upload/2018/07/figure-chess-with-red-background-vector.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+	  }
+	  
+	  .pageTitle{
+		font-size: 2em;
+		font-weight: bold;
+	  }
+	  .secondaryTitle{
+		color: grey;
+	  }
+	  
+	  .name {
+		background-color: #ebebeb;
+		color: white;
+	  }
+	  .name:hover {
+		border-bottom: 5px solid #770303;
+		height: 30px;
+		width: 380px;
+		transition: ease 0.5s;
+	  }
+	  
+	  .email {
+		background-color: #ebebeb;
+		height: 2em;
+	  }
+	  
+	  .email:hover {
+		border-bottom: 5px solid #770303;
+		height: 30px;
+		width: 380px;
+		transition: ease 0.5s;
+	  }
+	  
+	  .message {
+		background-color: #ebebeb;
+		overflow: hidden;
+		height: 10rem;
+	  }
+	  
+	  .message:hover {
+		border-bottom: 5px solid #800404;
+		height: 12em;
+		width: 380px;
+		transition: ease 0.5s;
+	  }
+	  
+	  .formEntrys {
+		display: block;
+		margin: 30px auto;
+		min-width: 300px;
+		padding: 10px;
+		border-radius: 2px;
+		border: none;
+		transition: all 0.5s ease 0s;
+	  }
+	  
+	  .submit {
+		width: 200px;
+		color: white;
+		background-color: #770303;
+		font-size: 20px;
+	  }
+	  
+	  .submit:hover {
+		box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
+		transform: translateY(-3px);
+		width: 300px;
+		border-top: 5px solid #800404;
+		border-radius: 0%;
+	  }
+	  
+	  @keyframes bounce {
+		0% {
+		  tranform: translate(0, 4px);
+		}
+		50% {
+		  transform: translate(0, 8px);
+		}
+	  } 
+	  .form-control{
+		border-color:#770303;
+		color:#770303;
+	  }
+	  .rt{
+		color:#770303;
+		font-style: normal;
+	  }
+	.g{
+		color:#770303;
+		font-style: normal;
+	}
+	
+	.link{
+		color:#770303;
+		font-style: normal;
+	}
+	  .td{
+		text-align:center;
+		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		color: #800404;
+	  }
+	  * {
+		font-family: Roboto;
+	  }
+	  
+	  .footer-distributed{
+		  background: #6d6c6c;
+		  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+		  box-sizing: border-box;
+		  width: 100%;
+		  font: bold 16px sans-serif;
+		  text-align: left;
+		  padding: 50px 60px 40px;
+		  overflow: hidden;
+	  }
+	  
+	  sectionz{
+		width: 100%;
+		display: inline-block;
+		background: #ccc;
+		height: 60vh;
+		text-align: center;
+		font-size: 22px;
+		font-weight: 700;
+		text-decoration: underline;
+	  }
+	  
+	  
+	  /* Footer left */
+	  
+	  .footer-distributed .footer-left{
+		  float: left;
+	  }
+	  
+	  /* The company logo */
+	  
+	  .footer-distributed h3{
+		  color:  #1f2022;
+		  font: normal 36px 'Roboto', cursive;
+		  margin: 0 0 10px;
+	  }
+	  
+	  .footer-distributed h3 span{
+		  color:  #770303;
+	  }
+	  
+	  /* Footer links */
+	  
+	  .footer-distributed .footer-links{
+		  color:  #770303;
+		  margin: 0 0 10px;
+		  padding: 0;
+	  }
+	  
+	  .footer-distributed .footer-links a{
+		  display:inline-block;
+		  line-height: 1.8;
+		  text-decoration: none;
+		  color:  inherit;
+	  }
+	  
+	  .footer-distributed .footer-company-name{
+		  color:  #1f2022;
+		  font-size: 14px;
+		  font-weight: normal;
+		  margin: 0;
+	  }
+	  
+	  /* Footer social icons */
+	  
+	  .footer-distributed .footer-icons{
+		  margin-top: 40px;
+	  }
+	  
+	  .footer-distributed .footer-icons a{
+		  display: inline-block;
+		  width: 35px;
+		  height: 35px;
+		  cursor: pointer;
+		  background-color:  #770303;
+		  border-radius: 2px;
+	  
+		  font-size: 20px;
+		  color: #ffffff;
+		  text-align: center;
+		  line-height: 35px;
+	  
+		  margin-right: 3px;
+		  margin-bottom: 5px;
+	  }
+	  
+	  /* Footer Right */
+	  
+	  .footer-distributed .footer-right{
+		  float: right;
+	  }
+	  
+	  .footer-distributed .footer-right p{
+		  display: inline-block;
+		  vertical-align: top;
+		  margin: 15px 42px 0 0;
+		  color: #770303;
+	  }
+	  
+	  /* The contact form */
+	  
+	  .footer-distributed form{
+		  display: inline-block;
+	  }
+	  
+	  .footer-distributed form input,
+	  .footer-distributed form textarea{
+		  display: block;
+		  border-radius: 3px;
+		  box-sizing: border-box;
+		  background-color:  #1f2022;
+		  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+		  border: none;
+		  resize: none;
+	  
+		  font: inherit;
+		  font-size: 14px;
+		  font-weight: normal;
+		  color:  #1f2022;
+	  
+		  width: 400px;
+		  padding: 18px;
+	  }
+	  
+	  .footer-distributed ::-webkit-input-placeholder {
+		  color:  #770303;
+	  }
+	  
+	  .footer-distributed ::-moz-placeholder {
+		  color:  #770303;
+		  opacity: 1;
+	  }
+	  
+	  .footer-distributed :-ms-input-placeholder{
+		  color:  #770303;
+	  }
+	  
+	  
+	  .footer-distributed form input{
+		  height: 55px;
+		  margin-bottom: 15px;
+	  }
+	  
+	  .footer-distributed form textarea{
+		  height: 100px;
+		  margin-bottom: 20px;
+	  }
+	  
+	  .footer-distributed form button{
+		  border-radius: 3px;
+		  background-color:  #770303;
+		  color: #1f2022;
+		  border: 0;
+		  padding: 15px 50px;
+		  font-weight: bold;
+		  float: right;
+	  }
+	  
+	  /* If you don't want the footer to be responsive, remove these media queries */
+	  
+	  @media (max-width: 1000px) {
+	  
+		  .footer-distributed {
+			  font: bold 14px sans-serif;
+		  }
+	  
+		  .footer-distributed .footer-company-name{
+			  font-size: 12px;
+		  }
+	  
+		  .footer-distributed form input,
+		  .footer-distributed form textarea{
+			  width: 250px;
+		  }
+	  
+		  .footer-distributed form button{
+			  padding: 10px 35px;
+		  }
+	  
+	  }
+	  
+	  @media (max-width: 800px) {
+	  
+		  .footer-distributed{
+			  padding: 30px;
+		  }
+	  
+		  .footer-distributed .footer-left,
+		  .footer-distributed .footer-right{
+			  float: none;
+			  max-width: 300px;
+			  margin: 0 auto;
+		  }
+	  
+		  .footer-distributed .footer-left{
+			  margin-bottom: 40px;
+		  }
+	  
+		  .footer-distributed form{
+			  margin-top: 30px;
+		  }
+	  
+		  .footer-distributed form{
+			  display: block;
+		  }
+	  
+		  .footer-distributed form button{
+			  float: none;
+		  }
+	  }
+	  
