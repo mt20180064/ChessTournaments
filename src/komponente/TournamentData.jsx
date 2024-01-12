@@ -16,26 +16,7 @@ const TournamentData = ({ turnir, kor, igraci}) => {
   
 const notify = () => toast("Uspešno ste se prijavili na turnir!");
 
-//console.log(currentUser);
 
- // const [kor, setKor]=useState({
-    //username:currentUser.username
-  //});
-   /*useEffect(()=>{
-    igraci.map((igrac) =>{
-          if(igrac.username == kor.username){
-            console.log("email igraca:")
-            console.log(igrac.username);
-            console.log("email usera:")
-            console.log(kor.username);
-           
-             setKor(igrac);
-              console.log(kor);
-      }
-    });
-  },[kor]);
-  console.log("sada je ulogovan:");
-  console.log(kor); */
   let navigate = useNavigate();
 
   function dodavanje() {
@@ -78,10 +59,6 @@ return(
     
     </tr>
 )
-
-        
-      
-    
   
 }
 

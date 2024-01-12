@@ -7,46 +7,64 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const Login = ({addUser, igraci}) => {
+const Login = ({addUser, clubs}) => {
     const notifyy = () => toast("Pokušajte ponovo! Pogrešan imejl ili lozinka.");
-    const notifyyy = () => toast("uspesno ste se registrovali. Prijavite se na sistem!");
-    const notifyyyy = () => toast("Vec postoji korisnik sa tim emailom.");
+    const notifyyy = () => toast("You successfully registered!");
+    const notifyyyy = () => toast("Some data is missing or invalid. Try again");
     const [userPodaci, postaviPodatke]= useState({
-        username:"stevie",
-        password:"stevie"
-    });
-    let navigacija = useNavigate();
-
-    const [userPodaciR, postaviPodatkeR]= useState({
-        name:"",
         username:"",
         password:""
     });
-    let navigacija2 = useNavigate();
-    function obradiDogadjaj(e){
-        let noviUserPodaci=userPodaciR;
-        noviUserPodaci[e.target.name]=e.target.value;
-        console.log(noviUserPodaci);
-        postaviPodatke(noviUserPodaci);
-    }
- 
-   function handleRegister(e){
-    e.preventDefault();
-    axios
-    .post("http://127.0.0.1:8000/api/register",userPodaciR).then(res=>{
-        console.log(res.data);
-        if (res.data.success===true){
-            
-            notifyyy();
-            navigacija2("/Login");
-          } else if (res.data.success===false){
-              notifyyyy();
-          }
-        
+    let navigacija = useNavigate();
+
+    const [userPodaciR, setUserPodaciR]= useState({
+        name:"",
+        username:"",
+        password:"",
+        surname:"",
+        category:"",
+        rating:"",
+        club:""
         
     });
+    let navigacija2 = useNavigate();
+    const obradiDogadjaj = (e) => {
+      if (e.target.name === 'club') {
+          const selectedClubId = e.target.value;
+          const selectedClub = clubs.find(club => club.id.toString() === selectedClubId);
+          setUserPodaciR({
+              ...userPodaciR,
+              club: selectedClub || null 
+          });
+      } else {
+          setUserPodaciR({
+              ...userPodaciR,
+              [e.target.name]: e.target.value
+          });
+      }
+  };
+ 
+  const handleRegister = (e) => {
+    e.preventDefault();
+  
+    handleSubmit();
+};
+           const handleSubmit = () => {
 
-    }
+        axios.post("http://localhost:8080/player", userPodaciR)
+            .then(response => {
+                console.log(response.data);
+                notifyyy();
+                navigacija2 ("/Home");
+            })
+            .catch(error => {
+                console.error(error);
+                notifyyyy();
+            });
+    };
+
+
+
    function handleLogin(e){
     e.preventDefault();
     console.log(userPodaci);
@@ -85,15 +103,60 @@ const Login = ({addUser, igraci}) => {
     <div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true"></input>
 
-			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Registracija</label>
-					<input type="name" name="name" placeholder="Korisnicko ime" required="" defaultValue = "player" onInput={obradiDogadjaj}></input> 
-					<input type="email" name="email" placeholder="Email" required="" defaultValue = "player0@gmail.com" onInput={obradiDogadjaj}></input>
-					<input type="password" name="password" placeholder="Lozinka" required="" defaultValue = "1111111" onInput={obradiDogadjaj}></input>
-					<button className="f" onClick={handleRegister}>Registruj se</button>
-				</form>
-			</div>
+    <div className="signup">
+    <form>
+        <label htmlFor="chk" aria-hidden="true">Registracija</label>
+        <input 
+            type="text" 
+            name="name" 
+            placeholder="Korisnicko ime" 
+            required 
+            
+            onChange={obradiDogadjaj}
+        />
+        <input 
+            type="text" 
+            name="username" 
+            placeholder="Email" 
+            required 
+            
+            onChange={obradiDogadjaj}
+        />
+        <input 
+            type="password" 
+            name="password" 
+            placeholder="Lozinka" 
+            required 
+           
+            onChange={obradiDogadjaj}
+        />
+        <input 
+            type="number" 
+            name="rating" 
+            placeholder="rating" 
+            required 
+           
+            onChange={obradiDogadjaj}
+        />
+        <input 
+            type="text" 
+            name="category" 
+            placeholder="category" 
+            required 
+          
+            onChange={obradiDogadjaj}
+        />
+        <select name="club" onChange={obradiDogadjaj}>
+    <option value="">Select a Club</option>
+    {clubs.map((club, index) => (
+        <option key={index} value={club.id}>{club.naziv}</option>
+    ))}
+</select>
+       
+        <button className="f" onClick={handleRegister}>Registruj se</button>
+    </form>
+</div>
+
 
 			<div class="login">
 				<form>

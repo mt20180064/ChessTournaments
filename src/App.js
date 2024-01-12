@@ -19,6 +19,7 @@ import Blog from './komponente/Blog';
 
 
 
+
 function App() {
   
   const [turniri, setTurniri] = useState();
@@ -75,7 +76,18 @@ useEffect(() => {
         }
         console.log(currentUser);
 
-  
+        const [clubs, setClubs] = useState([]);
+
+useEffect(() => {
+    axios.get('http://localhost:8080/club/all')
+        .then(response => {
+            setClubs(response.data); 
+        })
+        .catch(error => {
+            console.error('Error fetching clubs:', error);
+        });
+}, []);
+  console.log(clubs);
  
 
   
@@ -90,8 +102,8 @@ useEffect(() => {
     console.log(currentUser); <Route path="MyTournaments" element={<MyTournaments currentUser={currentUser} igraci={igraci} turniri={turniri} TournamentData={TournamentData} prijave={prijave} Prijava={Prijava}/>}></Route>
     
     </Route>
-    <Route path="Login" element={<Login addUser={addUser} igraci={igraci}/>}></Route>
-    
+    <Route path="Login" element={<Login addUser={addUser} igraci={igraci} clubs={clubs}/>}></Route>
+
     </Routes>
     </BrowserRouter>
     
@@ -100,3 +112,4 @@ useEffect(() => {
 }
 
 export default App;
+ 
