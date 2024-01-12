@@ -2,10 +2,6 @@ import React from 'react'
 
 import "../Tabela.css";
 
-
-
-
-
 const AllTournaments = ({TournamentData, currentUser, igraci, turniri}) => {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   function nadji() {

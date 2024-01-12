@@ -84,7 +84,6 @@ const Login = ({addUser, clubs}) => {
   });
   }
     
-    
 
     function handleInput(e){
       e.preventDefault();
@@ -94,8 +93,6 @@ const Login = ({addUser, clubs}) => {
     }));
 }
 
-
-    
 
  return(
     <>
@@ -146,8 +143,8 @@ const Login = ({addUser, clubs}) => {
           
             onChange={obradiDogadjaj}
         />
-        <select name="club" onChange={obradiDogadjaj}>
-    <option value="">Select a Club</option>
+        <select name="club" class="club" defaultValue="select a club" onChange={obradiDogadjaj}>
+        <option value="" disabled selected hidden>Select a Club</option>
     {clubs.map((club, index) => (
         <option key={index} value={club.id}>{club.naziv}</option>
     ))}

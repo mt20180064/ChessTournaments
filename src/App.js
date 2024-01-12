@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import './NavBar.css';
 import './Home.css';
@@ -8,7 +8,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './komponente/NavBar';
 import Home from './komponente/Home';
 import Login from './komponente/Login';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AllTournaments from './komponente/AllTournaments';
 import MyTournaments from './komponente/MyTournaments';
@@ -95,7 +94,7 @@ useEffect(() => {
   return (
     <BrowserRouter>
     <Routes>
-    <Route path="/" element={<NavBar/>} >
+    <Route path="/" element={<NavBar currentUser={currentUser}/>} >
     <Route path="Home" element={<Blog/>}></Route>
     
     <Route path="AllTournaments" element={<AllTournaments TournamentData={TournamentData} currentUser={currentUser} igraci={igraci} turniri={turniri}/>}></Route>

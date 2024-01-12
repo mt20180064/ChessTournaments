@@ -47,6 +47,18 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
+.club{
+	width: 60%;
+	height: 20px;
+	background: #e0dede;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
 .f{
 	width: 60%;
 	height: 40px;

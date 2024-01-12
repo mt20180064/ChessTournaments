@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const TournamentData = ({ turnir, kor, igraci}) => {
+const TournamentData = ({ turnir, kor}) => {
 
   
 const notify = () => toast("Uspešno ste se prijavili na turnir!");
@@ -20,11 +20,16 @@ const notify = () => toast("Uspešno ste se prijavili na turnir!");
   let navigate = useNavigate();
 
   function dodavanje() {
+    if (!turnir || !kor) {
+    
+        navigate('/Login');
+        return; 
+    }
     const registrationData = {
         tournamentID: turnir,
         playerID: kor
     };
-
+   
     axios.post('http://127.0.0.1:8080/registration', registrationData)
         .then(function (response) {
             console.log(JSON.stringify(response.data));

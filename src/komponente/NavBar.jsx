@@ -1,8 +1,23 @@
 import React from 'react';
-//import './NavBar.css';
 import { NavLink } from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
-const NavBar = () => {
+import { useNavigate } from "react-router-dom";
+
+
+const NavBar = ({currentUser}) => {
+
+	let navigate = useNavigate();
+
+    const handleMyTournamentsClick = (e) => {
+        e.preventDefault(); 
+        if (!currentUser) {
+            
+            navigate('/Login');
+        } else {
+           
+            navigate('/MyTournaments');
+        }
+    };
   return (
     <>
     <nav>
@@ -14,7 +29,7 @@ const NavBar = () => {
       <li><NavLink to="/Home" class="current">Početna</NavLink></li>
       <li><NavLink to="/Login">Prijavi se</NavLink></li>
       <li><NavLink to="/AllTournaments">Svi turniri</NavLink></li>
-      <li><NavLink to="/MyTournaments">Moji Turniri</NavLink></li>
+	  <li><a href="/MyTournaments" onClick={handleMyTournamentsClick}>Moji Turniri</a></li>
       
     </ul>
   </div>

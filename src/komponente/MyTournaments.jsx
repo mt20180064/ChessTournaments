@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const MyTournaments = ({ currentUser, turniri, igraci, TournamentData, prijave, Prijava }) => {
+   
   console.log(currentUser);
     const [playerTournaments, setPlayerTournaments] = useState([]);
 

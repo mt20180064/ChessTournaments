@@ -12,7 +12,6 @@ console.log(prijava);
 
 const deleteRegistration = async () => {
   try {
-      // Replace the URL with your actual endpoint
       const response = await axios.delete('http://localhost:8080/registration', {
           params: { id: prijava.id }
       });
