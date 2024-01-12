@@ -50,31 +50,10 @@ const Login = ({addUser, igraci}) => {
    function handleLogin(e){
     e.preventDefault();
     console.log(userPodaci);
-   /* axios
-    .post("http://127.0.0.1:8080/login" ,userPodaci).then(res=>{
-        console.log(res.data);
-        if (res.data.success===true){
-          window.sessionStorage.setItem("auth_token", res.data.access_token); 
-          addUser(userPodaci);
-          navigacija("/Home");
-        } else if (res.data.success===false){
-            notifyy();
-        }
-      const foundUser = igraci.find((igrac) => igrac.username === userPodaci.username && igrac.password === userPodaci.password);
-
-      if (foundUser) {
-        console.log("Ovo jeste dobro logovanje");
-        navigacija("/Home");
-        return;
-      } else {
-        console.log("Ovo nije dobro logovanje");
-        notifyy();
-        return;
-      }
-    });*/
     axios.post('http://127.0.0.1:8080/login', userPodaci)
   .then(response => {
     console.log("Ovo jeste dobro logovanje");
+        addUser(response.data);
         navigacija("/Home");
         return;
   })

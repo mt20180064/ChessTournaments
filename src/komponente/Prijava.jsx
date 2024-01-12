@@ -4,9 +4,12 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Prijava = ({prijava, igraci, turniri})=>{
+const Prijava = ({prijava, igraci, turniri, kor})=>{
   const notifyyy = () => toast("Obrisali ste prijavu.");
   const notifyyyy = () => toast("Niste osvojili nista na ovom turniru.");
+  console.log("evo prijave sa kojom se radi:");
+console.log(prijava);
+
 function obrisi (){
   const FormData = require('form-data');
 let data = new FormData();
@@ -33,42 +36,19 @@ notifyyy();
 function rez(){
   notifyyyy();
   }
-  const [kor, setKor]=useState({
-  });
-  useEffect(()=>{
-    igraci.map((igrac) =>{
-          if(igrac.IgracID == prijava.IgracID){
-            console.log("igrac:")
-            console.log(igrac.IgracID);
-            console.log("igrac iz prijave:")
-            console.log(prijava.IgracID);
-           
-             setKor(igrac);
-              console.log(kor);
-      }
-    });
-  },[kor]);
-  console.log("sada je ulogovan:");
-  console.log(kor);
+ 
 
 
- const [tur, setTur]=useState({
-  });
-  useEffect(()=>{
-    turniri.map((turnir) =>{
-          if(turnir.TurnirID == prijava.TurnirID){
-            console.log("turnir:")
-            console.log(turnir.TurnirID);
-            console.log("turnir prijava:")
-            console.log(prijava.TurnirID);
-           
-             setTur(turnir);
-              console.log(tur);
+  const [tur, setTur] = useState({});
+
+  useEffect(() => {
+    
+      if (prijava && prijava.tournamentID) {
+          setTur(prijava.tournamentID);
       }
-    });
-  },[tur]);
-  console.log("sada je turnir");
-  console.log(tur);
+  }, [prijava]); 
+  
+  
 
     return(
         
@@ -76,13 +56,13 @@ function rez(){
         
      <div className="card">
     <div className="card-header">
-       {kor.ime} {kor.prezime} <br></br>kategorija:{kor.kategorija} <br></br>rejting: {kor.rejting}
+       {kor.name} {kor.surname} <br></br>kategorija:{kor.category} <br></br>rejting: {kor.rating}
     </div>
     <div className="card-body">
-      <h5 className="card-title">{tur.Naziv}</h5>
+      <h5 className="card-title">{tur.name}</h5>
       <img className='slika' src={tur.Slika} alt="Lekcija"/>
-      <p className="card-text">Mesto: {tur.Nesto} <br></br>Tempo: {tur.Tempo} <br></br>Tip: {tur.Tip} <br></br>Status: {tur.Status} </p>
-      {tur.Status=="aktivan" ?
+      <p className="card-text">Mesto: {tur.place} <br></br>Tempo: {tur.pace} <br></br>Tip: {tur.type} <br></br>Status: {tur.status} </p>
+      {tur.status=="aktivan" ?
       <button onClick={obrisi}>Odustani od turnira<ToastContainer/></button> : <button onClick={rez}>Vas rezultat</button>
       }
     </div>

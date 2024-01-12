@@ -1,56 +1,39 @@
-import React from 'react';
-import axios from "axios";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
+const MyTournaments = ({ currentUser, turniri, igraci, TournamentData, prijave, Prijava }) => {
+  console.log(currentUser);
+    const [playerTournaments, setPlayerTournaments] = useState([]);
 
-const MyTournaments = ({currentUser, turniri, igraci, TournamentData, prijave, Prijava}) => {
-  
-  const [kor, setKor]=useState({
-    email:currentUser.email
-  });
-  useEffect(()=>{
-    igraci.map((igrac) =>{
-          if(igrac.email == kor.email){
-            console.log("email igraca:")
-            console.log(igrac.email);
-            console.log("email usera:")
-            console.log(kor.email);
-           
-             setKor(igrac);
-              console.log(kor);
-      }
-    });
-  },[kor]);
-  console.log("sada je ulogovan:");
-  console.log(kor);
+    useEffect(() => {
+        const fetchPlayerTournaments = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/registration/playersTournaments', {
+                    params: { playerId: currentUser.id }
+                });
+                setPlayerTournaments(response.data); 
+            } catch (error) {
+                console.error('Error fetching player tournaments:', error);
+            }
+        };
 
+        fetchPlayerTournaments();
+    }, [currentUser.id]); 
 
-  const [prijavem, setPrijavem]=useState();
-  useEffect(()=>{
-    console.log(kor.IgracID);
-      if(prijavem==null){
-        let t = kor.IgracID;
-          axios.get("http://127.0.0.1:8000/api/prijava/0/igrac").then((res)=>{
-            
-              setPrijavem(res.data.prijava);
-              console.log(prijavem);
-          });
-      }
-  },[prijavem]);
-console.log(prijavem);
-  
-  
-  return (
-    <div>
-      <div className="prijave" id="prijave" >
-      {prijavem == null ? <></> : prijavem.map(prijava=> (
-        <Prijava prijava={prijava}  turniri={turniri} igraci = {igraci} />
-    ))}
-          
-               
-    </div>
-    </div>
-  )
-}
+    return (
+        <div>
+            <div className="prijave" id="prijave">
+                {playerTournaments.length === 0 ? (
+                    <p>No tournaments found.</p>
+                ) : (
+                    playerTournaments.map(prijava => (
+                        <Prijava key={prijava.id} prijava={prijava} turniri={turniri} igraci={igraci} kor = {currentUser} />
+                    ))
+                )}
+            </div>
+        </div>
+    );
+};
 
-export default MyTournaments
+export default MyTournaments;
+

@@ -58,32 +58,23 @@ useEffect(() => {
     useEffect(()=>{
         if(prijave==null){
             axios.get("http://127.0.0.1:8080/registration").then((res)=>{
-              
-                setPrijave(res.data.data);
+                 console.log(res.data)
+                setPrijave(res.data);
                 console.log(prijave);
+            })
+            .catch ((error)=>{
+                console.error("error in registrations", error);
             });
         }
     },[prijave]);
 
     const[currentUser, setCurrentUser]=useState();
-    function addUser(u){ 
-      if(igraci != null){
-        console.log(igraci);
-          igraci.map((igrac) =>{
-              if(igrac.username == u.username){
-                console.log("email igraca:")
-                console.log(igrac.username);
-                console.log("email usera:")
-                console.log(u.username);
-                console.log(igrac);
-                 setCurrentUser(igrac);
-                  console.log(currentUser);   
-              };
-          });
-      };
-     setCurrentUser(u);
-     console.log(u);
-  }
+
+        function addUser(u) {
+            setCurrentUser(u);
+        }
+        console.log(currentUser);
+
   
  
 
@@ -96,7 +87,7 @@ useEffect(() => {
     <Route path="Home" element={<Blog/>}></Route>
     
     <Route path="AllTournaments" element={<AllTournaments TournamentData={TournamentData} igraci={igraci} turniri={turniri}/>}></Route>
-    <Route path="MyTournaments" element={<MyTournaments currentUser={currentUser} igraci={igraci} turniri={turniri} TournamentData={TournamentData} prijave={prijave} Prijava={Prijava}/>}></Route>
+    console.log(currentUser); <Route path="MyTournaments" element={<MyTournaments currentUser={currentUser} igraci={igraci} turniri={turniri} TournamentData={TournamentData} prijave={prijave} Prijava={Prijava}/>}></Route>
     
     </Route>
     <Route path="Login" element={<Login addUser={addUser} igraci={igraci}/>}></Route>
