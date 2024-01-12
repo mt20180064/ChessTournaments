@@ -4,7 +4,9 @@
  */
 package com.chess.organization.repository;
 
+import com.chess.organization.model.Player;
 import com.chess.organization.model.Registration;
+import java.util.List;
 import java.util.Optional;
 import org.hibernate.query.criteria.JpaRoot;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,4 +19,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     public Optional<Registration> findById(Long id);
+    public List<Registration> findByPlayerID(Player player );
 }

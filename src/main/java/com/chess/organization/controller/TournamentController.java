@@ -28,4 +28,5 @@ public class TournamentController {
     public List<Tournament> getAll(){
         return tournamentService.findAll();
     }
+
 }

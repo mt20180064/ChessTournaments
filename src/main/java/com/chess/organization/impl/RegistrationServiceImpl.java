@@ -4,6 +4,7 @@
  */
 package com.chess.organization.impl;
 
+import com.chess.organization.model.Player;
 import com.chess.organization.model.Registration;
 import com.chess.organization.repository.RegistrationRepository;
 import com.chess.organization.service.RegistrationService;
@@ -50,6 +51,11 @@ public class RegistrationServiceImpl implements RegistrationService{
     @Override
     public Registration saveUnique(Registration registration) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Registration> findByPlayerID(Player playerId) {
+       return registrationRepository.findByPlayerID(playerId);
     }
     
     

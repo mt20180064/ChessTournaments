@@ -26,37 +26,27 @@ public class Registration{
     private Long id;
     @ManyToOne
     @JoinColumn(name = "tournamentid")
-    private Tournament TournamentID;
+    private Tournament tournamentID;
     @ManyToOne
     @JoinColumn(name = "playerid")
-    private Player PlayerID;
+    private Player playerID;
 
     public Registration() {
     }
 
-    public Registration(Long id, Tournament TournamentID, Player PlayerID) {
+    public Registration(Long id, Tournament tournamentID, Player playerID) {
         this.id = id;
-        this.TournamentID = TournamentID;
-        this.PlayerID = PlayerID;
+        this.tournamentID = tournamentID;
+        this.playerID = playerID;
     }
+
+ 
+
+    
 
    
 
-    public Tournament getTournamentID() {
-        return TournamentID;
-    }
-
-    public void setTournamentID(Tournament TournamentID) {
-        this.TournamentID = TournamentID;
-    }
-
-    public Player getPlayerID() {
-        return PlayerID;
-    }
-
-    public void setPlayerID(Player PlayerID) {
-        this.PlayerID = PlayerID;
-    }
+    
 
     public Long getId() {
         return id;
@@ -64,6 +54,22 @@ public class Registration{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Tournament getTournamentID() {
+        return tournamentID;
+    }
+
+    public void setTournamentID(Tournament tournamentID) {
+        this.tournamentID = tournamentID;
+    }
+
+    public Player getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(Player playerID) {
+        this.playerID = playerID;
     }
 
     

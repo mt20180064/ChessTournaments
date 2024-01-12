@@ -4,6 +4,7 @@
  */
 package com.chess.organization.service;
 
+import com.chess.organization.model.Player;
 import com.chess.organization.model.Registration;
 import java.util.List;
 import java.util.Optional;
@@ -20,4 +21,5 @@ public interface RegistrationService {
     void delete (Long id);
    Optional<Registration> findById (Long id);
    Registration saveUnique(Registration registration);
+   List<Registration> findByPlayerID(Player playerId);
 }

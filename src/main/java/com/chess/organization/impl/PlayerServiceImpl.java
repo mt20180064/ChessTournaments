@@ -40,7 +40,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Optional<Player> findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return PlayerRepository.findById(id);
     }
 
     @Override
