@@ -10,29 +10,18 @@ const Prijava = ({prijava, igraci, turniri, kor})=>{
   console.log("evo prijave sa kojom se radi:");
 console.log(prijava);
 
-function obrisi (){
-  const FormData = require('form-data');
-let data = new FormData();
-
-let config = {
-  method: 'delete',
-  maxBodyLength: Infinity,
-  url: 'http://127.0.0.1:8000/api/prijava/'+prijava.PrijavaID,
-
-  data : data
+const deleteRegistration = async () => {
+  try {
+      // Replace the URL with your actual endpoint
+      const response = await axios.delete('http://localhost:8080/registration', {
+          params: { id: prijava.id }
+      });
+      console.log('Registration deleted:', response.data);
+      notifyyy();
+  } catch (error) {
+      console.error('Error deleting registration:', error);
+  }
 };
-
-
-
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
-notifyyy();
-}
 function rez(){
   notifyyyy();
   }
@@ -63,7 +52,7 @@ function rez(){
       <img className='slika' src={tur.Slika} alt="Lekcija"/>
       <p className="card-text">Mesto: {tur.place} <br></br>Tempo: {tur.pace} <br></br>Tip: {tur.type} <br></br>Status: {tur.status} </p>
       {tur.status=="aktivan" ?
-      <button onClick={obrisi}>Odustani od turnira<ToastContainer/></button> : <button onClick={rez}>Vas rezultat</button>
+      <button onClick={deleteRegistration}>Odustani od turnira<ToastContainer/></button> : <button onClick={rez}>Vas rezultat</button>
       }
     </div>
     

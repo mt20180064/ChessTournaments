@@ -86,7 +86,7 @@ useEffect(() => {
     <Route path="/" element={<NavBar/>} >
     <Route path="Home" element={<Blog/>}></Route>
     
-    <Route path="AllTournaments" element={<AllTournaments TournamentData={TournamentData} igraci={igraci} turniri={turniri}/>}></Route>
+    <Route path="AllTournaments" element={<AllTournaments TournamentData={TournamentData} currentUser={currentUser} igraci={igraci} turniri={turniri}/>}></Route>
     console.log(currentUser); <Route path="MyTournaments" element={<MyTournaments currentUser={currentUser} igraci={igraci} turniri={turniri} TournamentData={TournamentData} prijave={prijave} Prijava={Prijava}/>}></Route>
     
     </Route>

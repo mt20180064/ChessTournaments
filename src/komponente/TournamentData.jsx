@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const TournamentData = ({turnir,  igraci}) => {
+const TournamentData = ({ turnir, kor, igraci}) => {
 
   
 const notify = () => toast("Uspešno ste se prijavili na turnir!");
@@ -36,38 +36,27 @@ const notify = () => toast("Uspešno ste se prijavili na turnir!");
   },[kor]);
   console.log("sada je ulogovan:");
   console.log(kor); */
+  let navigate = useNavigate();
 
+  function dodavanje() {
+    const registrationData = {
+        tournamentID: turnir,
+        playerID: kor
+    };
 
-  const FormData = require('form-data');
-let data = new FormData();
-data.append('TurnirID', turnir.tournamentid);
-//data.append('IgracID', kor.IgracID);
+    axios.post('http://127.0.0.1:8080/registration', registrationData)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            if (response.data.success === true) {
+                console.log("Prijavili ste se na turnir!");
+                navigate("/MyTournaments");
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 
-  let navigate=useNavigate();
-
-  function dodavanje(){
-    var config = {
-      method: 'post',
-      url: 'http://127.0.0.1:8000/api/prijava',
-      
-      data: data,
-      
-  };
-  
-  axios(config)
-  .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      if(response.data.success == true){
-      // showMessage("Uspesno ste se prijavili!", "success", "center", 2000, false);
-          console.log("Prijavili ste se na turnir!");
-
-          navigate("/MyTournaments");
-      }
-  })
-  .catch(function (error) {
-      console.log(error);
-  });
-  }
   
 return(
 

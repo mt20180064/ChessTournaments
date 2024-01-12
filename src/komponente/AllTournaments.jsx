@@ -52,7 +52,7 @@ const AllTournaments = ({TournamentData, currentUser, igraci, turniri}) => {
       
       <tbody>
       {turniri == null ? <></> : turniri.map(turnir=> (
-        <TournamentData turnir={turnir} currentUser={currentUser} igraci = {igraci} />
+        <TournamentData turnir={turnir} kor={currentUser} igraci = {igraci} />
     ))}
       </tbody>
       </table>
