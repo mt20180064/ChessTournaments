@@ -6,6 +6,7 @@ package com.chess.organization.impl;
 
 import com.chess.organization.model.Player;
 import com.chess.organization.model.Registration;
+import com.chess.organization.model.Tournament;
 import com.chess.organization.repository.RegistrationRepository;
 import com.chess.organization.service.RegistrationService;
 import java.util.List;
@@ -56,6 +57,11 @@ public class RegistrationServiceImpl implements RegistrationService{
     @Override
     public List<Registration> findByPlayerID(Player playerId) {
        return registrationRepository.findByPlayerID(playerId);
+    }
+
+    @Override
+    public List<Registration> findByTournamentID(Tournament tournamentId) {
+       return registrationRepository.findByTournamentID(tournamentId);
     }
     
     

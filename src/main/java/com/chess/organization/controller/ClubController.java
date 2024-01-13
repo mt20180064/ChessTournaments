@@ -23,25 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/club")
 public class ClubController {
-    
      private final ClubService clubService;
 
-   
 
     public ClubController(ClubService clubService) {
-    
         this.clubService = clubService;
     }
      
     @GetMapping("/all")
      List<Club> getAll (){
-         
          return clubService.findAll();
      }
     
      @PostMapping("/save")
      Club save (Club club){
-         
          return clubService.save(club);
      }
      

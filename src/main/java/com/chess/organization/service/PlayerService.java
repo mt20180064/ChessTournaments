@@ -18,7 +18,7 @@ public interface PlayerService {
     void delete (Long id);
    Optional<Player> findById (Long id);
    Player saveUnique(Player player);
-   Optional<Player> findByUsername (String username);
+   Player findByUsername (String username);
 
     boolean checkPassword(Player player, String password);
 }

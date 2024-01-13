@@ -25,7 +25,7 @@ public class PlayerServiceImpl implements PlayerService {
     
     @Override
     public Player save(Player player) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return PlayerRepository.save(player);
     }
 
     @Override
@@ -49,8 +49,12 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Optional<Player> findByUsername(String username) {
-       return PlayerRepository.findByUsername(username);
+    public Player findByUsername(String username) {
+       Optional<Player> p = PlayerRepository.findByUsername(username);
+       if (p.isPresent()){
+           Player player = p.get();
+           return player;
+       } return null;
     }
 
     @Override

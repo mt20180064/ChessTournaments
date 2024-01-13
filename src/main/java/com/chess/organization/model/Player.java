@@ -137,20 +137,20 @@ public class Player {
 
    
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Player other = (Player) obj;
-        return this.id == other.id;
+   @Override
+public boolean equals(Object obj) {
+   
+    if (this == obj) {
+        return true;
     }
+    if (!(obj instanceof Player)) {
+        return false;
+    }
+
+    Player other = (Player) obj;
+    return this.id == other.id;
+}
+
 
     public LinkedList<Player> getCandidates() {
         return candidates;

@@ -6,8 +6,10 @@ package com.chess.organization.controller;
 
 import com.chess.organization.model.Player;
 import com.chess.organization.model.Registration;
+import com.chess.organization.model.Tournament;
 import com.chess.organization.service.PlayerService;
 import com.chess.organization.service.RegistrationService;
+import com.chess.organization.service.TournamentService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,12 +29,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    public RegistrationController(com.chess.organization.service.RegistrationService registrationService, com.chess.organization.service.PlayerService playerService) {
+    public RegistrationController(com.chess.organization.service.RegistrationService registrationService, com.chess.organization.service.PlayerService playerService, com.chess.organization.service.TournamentService tournamentService) {
         this.registrationService = registrationService;
         this.playerService = playerService;
+        this.tournamentService = tournamentService;
     }
    private final RegistrationService registrationService;
    private final PlayerService playerService;
+   private final TournamentService tournamentService;
    
    @GetMapping
    public List<Registration> getAll(){
@@ -48,6 +52,15 @@ public class RegistrationController {
        }
        return null;
    }
+   
+   /*@GetMapping("/tournamentPlayers")
+   public List<Registration> getForTournament (@RequestParam Long tournamentId){
+       Optional<Tournament> t =tournamentService.findById(tournamentId);
+       if (t.isPresent()){
+           Tournament tt = t.get();
+           return registrationService.findByTournamentID(tt);
+       } return null;
+   } */
     
    @DeleteMapping
    public void delete (@RequestParam Long id){

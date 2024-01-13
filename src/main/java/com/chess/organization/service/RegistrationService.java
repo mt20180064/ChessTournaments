@@ -6,6 +6,7 @@ package com.chess.organization.service;
 
 import com.chess.organization.model.Player;
 import com.chess.organization.model.Registration;
+import com.chess.organization.model.Tournament;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -22,4 +23,5 @@ public interface RegistrationService {
    Optional<Registration> findById (Long id);
    Registration saveUnique(Registration registration);
    List<Registration> findByPlayerID(Player playerId);
+   List<Registration> findByTournamentID (Tournament tournamentId);
 }
