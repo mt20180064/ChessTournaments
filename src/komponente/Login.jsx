@@ -72,8 +72,13 @@ const Login = ({addUser, clubs}) => {
   .then(response => {
     console.log("Ovo jeste dobro logovanje");
         addUser(response.data);
+        if (response.data.userType=="player"){
         navigacija("/Home");
-        return;
+        return;}
+        if (response.data.userType=="referee"){
+            navigacija("/ref");
+            return;
+        }
   })
   .catch(error => {
     if (error.response) {
@@ -92,7 +97,13 @@ const Login = ({addUser, clubs}) => {
         [e.target.name]: e.target.value
     }));
 }
+const [selectedCategory, setSelectedCategory] = useState('');
 
+const categories = ['VK', 'IV', 'III', 'II', 'I', 'MK', 'FM', 'IM', 'VM'];
+
+const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+};
 
  return(
     <>
@@ -106,7 +117,15 @@ const Login = ({addUser, clubs}) => {
         <input 
             type="text" 
             name="name" 
-            placeholder="Korisnicko ime" 
+            placeholder="Name" 
+            required 
+            
+            onChange={obradiDogadjaj}
+        />
+          <input 
+            type="text" 
+            name="surname" 
+            placeholder="Surname" 
             required 
             
             onChange={obradiDogadjaj}
@@ -135,14 +154,11 @@ const Login = ({addUser, clubs}) => {
            
             onChange={obradiDogadjaj}
         />
-        <input 
-            type="text" 
-            name="category" 
-            placeholder="category" 
-            required 
-          
-            onChange={obradiDogadjaj}
-        />
+       <select name="category" class="club" value={selectedCategory} onChange={obradiDogadjaj}>
+                {categories.map((category, index) => (
+                    <option key={index} value={category}>{category}</option>
+                ))}
+            </select>
         <select name="club" class="club" defaultValue="select a club" onChange={obradiDogadjaj}>
         <option value="" disabled selected hidden>Select a Club</option>
     {clubs.map((club, index) => (

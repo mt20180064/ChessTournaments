@@ -14,6 +14,7 @@ import MyTournaments from './komponente/MyTournaments';
 import TournamentData from './komponente/TournamentData';
 import Prijava from './komponente/Prijava';
 import Blog from './komponente/Blog';
+import RefereeHome from './komponente/RefereeHome';
 
 
 
@@ -102,6 +103,7 @@ useEffect(() => {
     
     </Route>
     <Route path="Login" element={<Login addUser={addUser} igraci={igraci} clubs={clubs}/>}></Route>
+    <Route path="ref" element = {<RefereeHome addUser={addUser} igraci={igraci} turniri={turniri} clubs ={clubs}/>}></Route>
 
     </Routes>
     </BrowserRouter>
