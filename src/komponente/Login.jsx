@@ -174,8 +174,8 @@ const handleCategoryChange = (e) => {
 			<div class="login">
 				<form>
 					<label for="chk" aria-hidden="true">Prijava</label>
-					<input type="username" name="username" placeholder="username" required="" defaultValue = "stevi" onInput={handleInput}></input>
-					<input type="password" name="password" placeholder="Lozinka" required="" defaultValue="stevi" onInput={handleInput}></input>
+					<input type="username" name="username" placeholder="username" required="" defaultValue = "eko" onInput={handleInput}></input>
+					<input type="password" name="password" placeholder="Lozinka" required="" defaultValue="eko" onInput={handleInput}></input>
 					<button className="f" onClick={handleLogin}>Prijavi se<ToastContainer/></button>
 				</form>
 			</div>

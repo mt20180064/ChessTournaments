@@ -15,6 +15,7 @@ import TournamentData from './komponente/TournamentData';
 import Prijava from './komponente/Prijava';
 import Blog from './komponente/Blog';
 import RefereeHome from './komponente/RefereeHome';
+import TournamentHome from './komponente/TournamentHome';
 
 
 
@@ -103,7 +104,9 @@ useEffect(() => {
     
     </Route>
     <Route path="Login" element={<Login addUser={addUser} igraci={igraci} clubs={clubs}/>}></Route>
-    <Route path="ref" element = {<RefereeHome addUser={addUser} igraci={igraci} turniri={turniri} clubs ={clubs}/>}></Route>
+    <Route path ="TournamentHome" element = {<TournamentHome  currentUser={currentUser}/>}></Route>
+    <Route path="TournamentHome/:tournamentId" element={<TournamentHome currentUser={currentUser} igraci={igraci} clubs={clubs}/>}></Route>
+    <Route path="ref" element = {<RefereeHome currentUser={currentUser} igraci={igraci} turniri={turniri} clubs ={clubs}/>}></Route>
 
     </Routes>
     </BrowserRouter>
