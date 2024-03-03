@@ -26,7 +26,7 @@ public class Tournament {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "tournamentid")
-    private int id;
+    private Long id;
     @Column (name = "naziv")
     private String name;
     @Column (name = "mesto")
@@ -62,7 +62,7 @@ public class Tournament {
     public Tournament() {
     }
 
-    public Tournament(int id, String name, String place, String type, String pace, LinkedList<Game> games, LinkedList<Player> players, Referee referee, String status, String region) {
+    public Tournament(Long id, String name, String place, String type, String pace, LinkedList<Game> games, LinkedList<Player> players, Referee referee, String status, String region) {
         this.id = id;
         this.name = name;
         this.place = place;
@@ -75,13 +75,7 @@ public class Tournament {
         this.region = region;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+   
 
     public String getName() {
         return name;
@@ -200,6 +194,14 @@ public class Tournament {
 
     public void setRounds(LinkedList<Round> rounds) {
         this.rounds = rounds;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
   
   

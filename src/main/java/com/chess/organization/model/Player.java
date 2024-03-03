@@ -4,6 +4,7 @@
  */
 package com.chess.organization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,10 +47,12 @@ public class Player {
     private String password;
     
     @Transient
+    @JsonIgnore
     private LinkedList<Player> protivnici;
     @Transient
     private double points;
     @Transient
+    @JsonIgnore
     private LinkedList<Player> candidates = new LinkedList<>();
             
 

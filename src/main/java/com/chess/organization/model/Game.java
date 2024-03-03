@@ -4,46 +4,64 @@
  */
 package com.chess.organization.model;
 
-import java.sql.ResultSet;
-import java.util.LinkedList;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 
 /**
  *
  * @author Milena Kutch
  */
+@Entity
+@Table (name= "game" , schema = "projekat")
 public class Game {
-     private int id;
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
+     private Long id;
+    @Column (name="tableNumber")
     private int table;
-    private Referee referee;
+   // private Referee referee;
+    @ManyToOne
+    @JoinColumn(name = "white")
     private Player white;
+     @ManyToOne
+    @JoinColumn(name = "black")
     private Player black;
-    private Round round;
+    
+    
+    @ManyToOne
+    @JoinColumn(name = "tournamentid")
     private Tournament tournament;
+    @Column (name="points_white")
     private double pointswhite;
+    @Column (name="points_black")
     private double pointsblack;
 
     public Game() {
     }
 
-    public Game( int table, Player white, Player black, Round round,  double pointswhite, double pointsblack) {
+    public Game( int table, Player white, Player black,  double pointswhite, double pointsblack) {
         
         this.table = table;
        
         this.white = white;
         this.black = black;
-        this.round = round;
+        
        // this.tournament = tournament;
         this.pointswhite = pointswhite;
         this.pointsblack = pointsblack;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+ 
 
     public int getTable() {
         return table;
@@ -53,13 +71,7 @@ public class Game {
         this.table = table;
     }
 
-    public Referee getReferee() {
-        return referee;
-    }
-
-    public void setReferee(Referee referee) {
-        this.referee = referee;
-    }
+ 
 
     public Player getWhite() {
         return white;
@@ -77,13 +89,7 @@ public class Game {
         this.black = black;
     }
 
-    public Round getRound() {
-        return round;
-    }
-
-    public void setRound(Round round) {
-        this.round = round;
-    }
+   
 
     public Tournament getTournament() {
         return tournament;
@@ -107,6 +113,14 @@ public class Game {
 
     public void setPointsblack(double pointsblack) {
         this.pointsblack = pointsblack;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
