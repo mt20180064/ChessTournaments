@@ -78,11 +78,9 @@ public class TournamentServiceImpl implements TournamentService{
     @Override
     public List<Game> pairNextRound(Long tournamentId) throws Exception {
         int tableNumber = 1;
-         List<Player> players = getPlayersForTournament(tournamentId);
+    List<Player> players = getPlayersForTournament(tournamentId);
     List<Game> playedGames = getGamesPlayedOnTournament (tournamentId);
-    // Sortiranje igrača na osnovu poena
     players.sort(Comparator.comparing(Player::getPoints).reversed());
-
    ArrayList<Player> pla= new ArrayList<>();
                     ArrayList<Game> helpList=new ArrayList<>();
                      for (Player player : players) {
@@ -98,22 +96,13 @@ public class TournamentServiceImpl implements TournamentService{
                              if (!alreadyThere(last,helpList)){
                                  last.setTable(tableNumber++);
                              helpList.add(last);
-                             
-                             } else continue;
-                                
-                             }
-                         }
-                         
-                     }
-                    
+                             } else continue;  
+                             }}}
                      if (helpList.size()*2==players.size()){
-                       
                        return helpList; } 
                      else {
-                         
                        for (Player player : players) {
-                             Collections.shuffle(player.getCandidates());
-                             
+                             Collections.shuffle(player.getCandidates());  
                          }
                        try {
                              pairNextRound(tournamentId); 
@@ -138,13 +127,13 @@ public class TournamentServiceImpl implements TournamentService{
             game.setBlack(blackPlayer);
             game.setPointswhite(gameDTO.getPointsWhite());
             game.setPointsblack(gameDTO.getPointsBlack());
-            game.setTournament(tournament); // Pretpostavimo da Game entitet ima referencu na Tournament
-            // Dodajte ostale potrebne informacije za igru, kao što su broj stola, itd.
+            game.setTournament(tournament); 
+            
             
             games.add(game);
         }
 
-        gameRepository.saveAll(games); // Čuvanje svih igara iz trenutne runde u bazu
+        gameRepository.saveAll(games); 
     }
     }
 
@@ -181,11 +170,6 @@ public class TournamentServiceImpl implements TournamentService{
     
     }
 
-    private boolean checkIfPlayed(Player p1, Player p2) {
-        if (p1.getProtivnici().contains(p2))
-                        return true;
-                 else  return false; 
-    }
 
     private boolean alreadyThere(Game last, ArrayList<Game> helpList) {
         for (Game game : helpList) {

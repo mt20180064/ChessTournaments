@@ -16,10 +16,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import javax.swing.JOptionPane;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,4 +67,13 @@ public ResponseEntity<?> submitRoundResults(@RequestBody List<GameDTO> gameResul
     }
 }
 
+@PutMapping("/updateStatus")
+public ResponseEntity<Tournament> updateStatus (@RequestParam Long tournamentId) throws Exception{
+        Optional<Tournament> t = tournamentService.findById(tournamentId);
+    if (t.isEmpty())throw new Exception("nema turniea");
+    Tournament tournament = t.get();
+    tournament.setStatus("zavrsen");
+    Tournament tournamentUpdated = tournamentService.save(tournament);
+    return new ResponseEntity<>(tournamentUpdated, HttpStatus.OK);
+}
 }
