@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RefereeRepository extends JpaRepository<Referee, Long>{
-    public Optional<Referee> findById(Long id);
+    public Optional<Referee> findById(Long id) ;
     public Optional<Referee> findByUsername (String username);
 }

@@ -49,8 +49,7 @@ public class TournamentController {
       @GetMapping("/pairNextRound")
     public ResponseEntity<?> pairNextRound(@RequestParam Long tournamentId) {
         try {
-            // Logika za uparivanje sledećeg kola
-            // Ovo može uključivati pozivanje servisa koji će obaviti uparivanje
+           
            List<Game> nextRoundGames = tournamentService.pairNextRound(tournamentId);
             return ResponseEntity.ok(nextRoundGames);
         } catch (Exception e) {
@@ -75,5 +74,13 @@ public ResponseEntity<Tournament> updateStatus (@RequestParam Long tournamentId)
     tournament.setStatus("zavrsen");
     Tournament tournamentUpdated = tournamentService.save(tournament);
     return new ResponseEntity<>(tournamentUpdated, HttpStatus.OK);
+}
+
+@PostMapping("/new-tournament")
+public ResponseEntity<Tournament> save (@RequestBody Tournament tournament) throws Exception {
+        Optional<Tournament> tournament1= tournamentService.findById(tournament.getId());
+    Tournament t = tournament1.get();
+    Tournament tour = tournamentService.save(t);
+    return new ResponseEntity<>(t, HttpStatus.CREATED);
 }
 }

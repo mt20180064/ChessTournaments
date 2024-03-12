@@ -11,6 +11,7 @@ import com.chess.organization.model.Registration;
 import com.chess.organization.model.Tournament;
 import com.chess.organization.repository.GameRepository;
 import com.chess.organization.repository.PlayerRepository;
+import com.chess.organization.repository.RefereeRepository;
 import com.chess.organization.repository.RegistrationRepository;
 import com.chess.organization.repository.TournamentRepository;
 import com.chess.organization.service.TournamentService;
@@ -22,7 +23,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 /**
  *
@@ -31,22 +35,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class TournamentServiceImpl implements TournamentService{
 
-    public TournamentServiceImpl(com.chess.organization.repository.TournamentRepository TournamentRepository, com.chess.organization.repository.PlayerRepository playerRepository, com.chess.organization.repository.GameRepository gameRepository, com.chess.organization.repository.RegistrationRepository RegistrationRepository) {
-        this.TournamentRepository = TournamentRepository;
+    public TournamentServiceImpl(TournamentRepository tournamentRepository, PlayerRepository playerRepository, GameRepository gameRepository, RegistrationRepository registrationRepository, RefereeRepository refereeRepository) {
+        this.TournamentRepository = tournamentRepository;
         this.playerRepository=playerRepository;
         this.gameRepository=gameRepository;
-        this.RegistrationRepository = RegistrationRepository;
+        this.RegistrationRepository = registrationRepository;
+        this.refereeRepository=refereeRepository;
     }
 
-  
+  private final RefereeRepository refereeRepository;
    private final TournamentRepository TournamentRepository;
    private final PlayerRepository playerRepository;
    private final GameRepository gameRepository;
    private final RegistrationRepository RegistrationRepository;
+
+   
+    
    
     @Override
-    public Tournament save(Tournament tournament) {
-        return TournamentRepository.save(tournament);
+    public Tournament save(Tournament tournament) throws Exception {
+        if (tournament.getName()==null || isEmpty(refereeRepository.findById(tournament.getReferee().getId()))) 
+            throw new Exception ("tournament must have name and valid refereeid");
+       
+    return TournamentRepository.save(tournament);
     }
 
     @Override

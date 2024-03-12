@@ -15,7 +15,7 @@ import java.util.Optional;
  * @author user
  */
 public interface TournamentService {
-    Tournament save (Tournament tournament);
+    Tournament save (Tournament tournament) throws Exception;
     List<Tournament> findAll();
     void delete (Long id);
    Optional<Tournament> findById (Long id);

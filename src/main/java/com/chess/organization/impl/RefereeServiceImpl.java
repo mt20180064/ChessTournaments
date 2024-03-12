@@ -53,7 +53,6 @@ public class RefereeServiceImpl implements RefereeService{
        } else try {
            throw new Exception ("That referee doesn't exist");
              } catch (Exception ex) {
-                ex.printStackTrace();
              } return null;
     }
 

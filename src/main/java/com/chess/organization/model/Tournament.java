@@ -75,6 +75,31 @@ public class Tournament {
         this.region = region;
     }
 
+    public Tournament(Long id, String name, String place, String type, String pace, String status, Referee referee, String region) {
+        this.id = id;
+        this.name = name;
+        this.place = place;
+        this.type = type;
+        this.pace = pace;
+        this.status = status;
+        this.referee = referee;
+        this.region = region;
+    }
+
+    public Tournament(Long id, String name, String place, String type, String pace, String status, String region) {
+        this.id = id;
+        this.name = name;
+        this.place = place;
+        this.type = type;
+        this.pace = pace;
+        this.status = status;
+        this.region = region;
+    }
+
+    public Tournament(Long tournamentId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
    
 
     public String getName() {

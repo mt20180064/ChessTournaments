@@ -17,7 +17,7 @@ public interface RefereeService {
      Referee save (Referee referee);
     List<Referee> findAll();
     void delete (Long id);
-   Referee findById (Long id);
+   Referee findById (Long id) throws Exception;
    Referee saveUnique(Referee referee);
    Referee findByUsername (String username);
 }
