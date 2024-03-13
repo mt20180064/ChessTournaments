@@ -70,6 +70,10 @@ public class Player {
         this.club = club;
       
     }
+
+    public Player(Long id) {
+        this.id = id;
+    }
     
     
 

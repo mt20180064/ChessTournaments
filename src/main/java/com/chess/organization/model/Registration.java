@@ -40,6 +40,11 @@ public class Registration{
         this.playerID = playerID;
     }
 
+    public Registration(Tournament tournamentID, Player playerID) {
+        this.tournamentID = tournamentID;
+        this.playerID = playerID;
+    }
+
  
 
     

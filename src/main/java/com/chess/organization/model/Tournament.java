@@ -96,9 +96,10 @@ public class Tournament {
         this.region = region;
     }
 
-    public Tournament(Long tournamentId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Tournament(Long id) {
+        this.id = id;
     }
+
 
    
 

@@ -54,8 +54,8 @@ public class TournamentServiceImpl implements TournamentService{
    
     @Override
     public Tournament save(Tournament tournament) throws Exception {
-        if (tournament.getName()==null || isEmpty(refereeRepository.findById(tournament.getReferee().getId()))) 
-            throw new Exception ("tournament must have name and valid refereeid");
+        if (isEmpty(refereeRepository.findById(tournament.getReferee().getId()))) 
+            throw new Exception ("tournament must have valid refereeid");
        
     return TournamentRepository.save(tournament);
     }
@@ -81,8 +81,9 @@ public class TournamentServiceImpl implements TournamentService{
     }
 
     @Override
-    public Tournament saveUnique(Tournament tournament) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Tournament saveUnique(Tournament tournament) throws Exception {
+        if (tournament.getName()==null) throw new Exception ("tournament must have a name");
+        return TournamentRepository.save(tournament);
     }
  
  
@@ -148,7 +149,7 @@ public class TournamentServiceImpl implements TournamentService{
     }
     }
 
-    private List<Player> getPlayersForTournament(Long tournamentId) {
+    public List<Player> getPlayersForTournament(Long tournamentId) {
         Optional<Tournament> t =findById(tournamentId);
         LinkedList<Player> players = new LinkedList<>();
        if (t.isPresent()){
