@@ -41,14 +41,7 @@ public class ClubController {
      }
      
      
-     @PutMapping("/update{id}")
-     Club update (Club club){
-        
-         Optional<Club> opt = clubService.findById(club.getId());
-         if (opt.isPresent()){
-           return  clubService.save(club);
-         } return null;
-     }
+    
      
      @DeleteMapping
      void delete (Long id){
