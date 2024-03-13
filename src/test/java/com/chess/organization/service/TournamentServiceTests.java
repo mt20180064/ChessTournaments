@@ -4,19 +4,27 @@
  */
 package com.chess.organization.service;
 
+import com.chess.organization.dto.GameDTO;
+import com.chess.organization.model.Game;
 import com.chess.organization.model.Player;
 import com.chess.organization.model.Referee;
 import com.chess.organization.model.Registration;
 import com.chess.organization.model.Tournament;
+import com.chess.organization.repository.GameRepository;
+import com.chess.organization.repository.PlayerRepository;
 import com.chess.organization.repository.RefereeRepository;
 import com.chess.organization.repository.RegistrationRepository;
 import com.chess.organization.repository.TournamentRepository;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,6 +32,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -51,8 +61,13 @@ public class TournamentServiceTests {
     private RefereeRepository refereeRepository;
     
     @MockBean
+    private PlayerRepository playerRepository;
+    
+    @MockBean
     private RefereeService refereeService;
     
+    @MockBean
+    private GameRepository gameRepository;
     @MockBean
     private RegistrationRepository registrationRepository;
     
@@ -166,6 +181,97 @@ public void getPlayersForTournamentTest(Long tournamentid, Long playerid) {
         assertTrue(players.contains(player1), "The list should contain player 1.");
         assertTrue(players.contains(player2), "The list should contain player 2.");
     }
+@Test
+public void findByIdSuccessTest() throws Exception {
+    Long tournamentId = 1L;
+    Tournament expectedTournament = new Tournament(tournamentId, "Tournament Name", "Location One", "Category One", "Duration One", "Status One", "Region One"); 
+    when(tournamentRepository.findById(tournamentId)).thenReturn(Optional.of(expectedTournament));
 
+    Tournament result = tournamentService.findById(tournamentId);
 
+    assertEquals(expectedTournament, result, "returned and expectedTournament should be the same");
+}
+@Test
+public void findByIdThrowsExceptionWhenNotFoundTest() {
+    Long tournamentId = 2L;
+    when(tournamentRepository.findById(tournamentId)).thenReturn(Optional.empty());
+
+    Exception exception = assertThrows(Exception.class, () -> {
+        tournamentService.findById(tournamentId);
+    }, "throws exception if there's no tournament");
+
+    assertTrue(exception.getMessage().contains("there is no tournament with this id"));
+}
+
+@Test
+   public void havePlayedAgainstEachOtherTrueTest() {
+        Player player1 = new Player(1L); 
+        Player player2 = new Player(2L);
+        Game game = new Game(player1, player2); 
+
+        List<Game> playedGames = Arrays.asList(game);
+
+     
+        boolean result = tournamentService.havePlayedAgainstEachOther(player1, player2, playedGames);
+
+        assertTrue(result, "Players did already meet");
+    }
+
+    @Test
+    public void havePlayedAgainstEachOtherFalseTest() {
+        Player player1 = new Player(1L);
+        Player player2 = new Player(2L);
+        Player player3 = new Player(3L); 
+        Game game = new Game(player1, player3);
+
+        List<Game> playedGames = Arrays.asList(game);
+
+       
+        boolean result = tournamentService.havePlayedAgainstEachOther(player1, player2, playedGames);
+
+        assertFalse(result, "Players idd not already meet");
+    }
+    
+    @Test
+    public void getGamesPlayedOnTournamentReturnsGamesList() throws Exception {
+        
+        Long tournamentId = 1L;
+        Tournament tournament = new Tournament(tournamentId);
+        Game game1 = new Game(); 
+        Game game2 = new Game(); 
+        List<Game> expectedGames = Arrays.asList(game1, game2);
+
+        when(tournamentRepository.findById(tournamentId)).thenReturn(Optional.of(tournament));
+        when(gameRepository.findByTournament(tournament)).thenReturn(expectedGames);
+
+        
+        List<Game> actualGames = tournamentService.getGamesPlayedOnTournament(tournamentId);
+        assertEquals(expectedGames, actualGames, "The returned games list should match the expected list");
+    }
+    
+   /*@Test
+    public void processRoundResultsUsingCsvDataTest() throws Exception {
+        Long tournamentId = 1L;
+      
+        File csvFile = Paths.get("src/main/resources/games.csv").toFile();
+        List<GameDTO> gameDTOs = new ArrayList<>();
+        try (Scanner scanner = new Scanner(csvFile)) {
+            scanner.nextLine(); 
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(";");
+                Long whitePlayerId = Long.valueOf(data[0].trim());
+                Long blackPlayerId = Long.valueOf(data[1].trim());
+                double pointsWhite = Double.parseDouble(data[2].trim());
+                double pointsBlack = Double.parseDouble(data[3].trim());
+                GameDTO gameDTO = new GameDTO(whitePlayerId, blackPlayerId, pointsWhite, pointsBlack);
+                gameDTOs.add(gameDTO);
+            }
+           
+        }
+
+        tournamentService.processRoundResults(gameDTOs, tournamentId);
+        verify(gameRepository, times(1)).saveAll(any());
+        
+    }*/
 }

@@ -55,18 +55,16 @@ public class PlayerController {
     }
     
     @GetMapping("/tournamentPlayers")
-    public List<Player> tournamentPlayers (@RequestParam Long tournamentId){
-        Optional<Tournament> t =tournamentService.findById(tournamentId);
+    public List<Player> tournamentPlayers (@RequestParam Long tournamentId) throws Exception{
+        Tournament t =tournamentService.findById(tournamentId);
         LinkedList<Player> players = new LinkedList<>();
-       if (t.isPresent()){
-           Tournament tt = t.get();
-          List<Registration> listOfRegs= registrationService.findByTournamentID(tt);
+          List<Registration> listOfRegs= registrationService.findByTournamentID(t);
            for (Registration listOfReg : listOfRegs) {
                if (!players.contains(listOfReg.getPlayerID())){
                    players.add(listOfReg.getPlayerID());
                }
            }
-       } return players;
+        return players;
     }
     @GetMapping("/pair")
     public List<Game> pairFirstRound(@RequestParam Long tid) throws Exception {

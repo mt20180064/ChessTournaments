@@ -8,6 +8,7 @@ package com.chess.organization.controller;
  *
  * @author user
  */
+
 public class TournamentControllerTests {
     
 }

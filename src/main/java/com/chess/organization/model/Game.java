@@ -61,6 +61,11 @@ public class Game {
         this.pointsblack = pointsblack;
     }
 
+    public Game(Player white, Player black) {
+        this.white = white;
+        this.black = black;
+    }
+
  
 
     public int getTable() {

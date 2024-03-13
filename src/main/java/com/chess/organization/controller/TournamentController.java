@@ -6,18 +6,14 @@ package com.chess.organization.controller;
 
 import com.chess.organization.dto.GameDTO;
 import com.chess.organization.model.Game;
-import com.chess.organization.model.Player;
-import com.chess.organization.model.Round;
+
+
 import com.chess.organization.model.Tournament;
 import com.chess.organization.service.TournamentService;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
+
 import java.util.List;
-import java.util.Optional;
-import javax.swing.JOptionPane;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,19 +64,18 @@ public ResponseEntity<?> submitRoundResults(@RequestBody List<GameDTO> gameResul
 
 @PutMapping("/updateStatus")
 public ResponseEntity<Tournament> updateStatus (@RequestParam Long tournamentId) throws Exception{
-        Optional<Tournament> t = tournamentService.findById(tournamentId);
-    if (t.isEmpty())throw new Exception("nema turniea");
-    Tournament tournament = t.get();
-    tournament.setStatus("zavrsen");
-    Tournament tournamentUpdated = tournamentService.save(tournament);
+        Tournament t = tournamentService.findById(tournamentId);
+
+    t.setStatus("zavrsen");
+    Tournament tournamentUpdated = tournamentService.save(t);
     return new ResponseEntity<>(tournamentUpdated, HttpStatus.OK);
 }
 
 @PostMapping("/new-tournament")
 public ResponseEntity<Tournament> save (@RequestBody Tournament tournament) throws Exception {
-        Optional<Tournament> tournament1= tournamentService.findById(tournament.getId());
-    Tournament t = tournament1.get();
-    Tournament tour = tournamentService.save(t);
-    return new ResponseEntity<>(t, HttpStatus.CREATED);
+        Tournament tournament1= tournamentService.findById(tournament.getId());
+  
+    Tournament tour = tournamentService.save(tournament1);
+    return new ResponseEntity<>(tour, HttpStatus.CREATED);
 }
 }

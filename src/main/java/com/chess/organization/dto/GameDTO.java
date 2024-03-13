@@ -55,5 +55,20 @@ public class GameDTO {
         this.tableNumber = tableNumber;
     }
 
+    public GameDTO(Long whitePlayerId, Long blackPlayerId, Double pointsWhite, Double pointsBlack) {
+        this.whitePlayerId = whitePlayerId;
+        this.blackPlayerId = blackPlayerId;
+        this.pointsWhite = pointsWhite;
+        this.pointsBlack = pointsBlack;
+    }
+
+    public GameDTO(Long whitePlayerId, Long blackPlayerId, Double pointsWhite, Double pointsBlack, Long tableNumber) {
+        this.whitePlayerId = whitePlayerId;
+        this.blackPlayerId = blackPlayerId;
+        this.pointsWhite = pointsWhite;
+        this.pointsBlack = pointsBlack;
+        this.tableNumber = tableNumber;
+    }
+
     
 }

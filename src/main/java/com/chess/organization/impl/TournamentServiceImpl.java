@@ -76,8 +76,13 @@ public class TournamentServiceImpl implements TournamentService{
     }
 
     @Override
-    public Optional<Tournament> findById(Long id) {
-         return TournamentRepository.findById(id);
+    public Tournament findById(Long id) throws Exception {
+        Optional <Tournament> t = TournamentRepository.findById(id);
+        if (t.isEmpty()){
+            throw new Exception ("there is no tournament with this id");
+        } 
+        Tournament tour = t.get();
+         return tour;
     }
 
     @Override
@@ -149,21 +154,27 @@ public class TournamentServiceImpl implements TournamentService{
     }
     }
 
-    public List<Player> getPlayersForTournament(Long tournamentId) {
-        Optional<Tournament> t =findById(tournamentId);
-        LinkedList<Player> players = new LinkedList<>();
-       if (t.isPresent()){
-           Tournament tt = t.get();
-          List<Registration> listOfRegs= RegistrationRepository.findByTournamentID(tt);
-           for (Registration listOfReg : listOfRegs) {
-               if (!players.contains(listOfReg.getPlayerID())){
-                   players.add(listOfReg.getPlayerID());
-               }
-           }
-       } return players;
+    @Override
+    public List<Player> getPlayersForTournament(Long tournamentId)  {
+        try {
+            Tournament t =findById(tournamentId);
+            LinkedList<Player> players = new LinkedList<>();
+            
+            
+            List<Registration> listOfRegs= RegistrationRepository.findByTournamentID(t);
+            for (Registration listOfReg : listOfRegs) {
+                if (!players.contains(listOfReg.getPlayerID())){
+                    players.add(listOfReg.getPlayerID());
+                }
+            }
+            return players;
+        } catch (Exception ex) {
+            Logger.getLogger(TournamentServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } return null;
     }
 
-    private List<Game> getGamesPlayedOnTournament(Long tournamentId) throws Exception {
+    @Override
+    public List<Game> getGamesPlayedOnTournament(Long tournamentId) throws Exception {
         Optional<Tournament> t = TournamentRepository.findById(tournamentId);
         if (t.isEmpty()){
             throw new Exception("Non existing tournament");
@@ -174,7 +185,8 @@ public class TournamentServiceImpl implements TournamentService{
         return tournamentGames;
     }
 
-    private boolean havePlayedAgainstEachOther(Player player1, Player player2, List<Game> playedGames) {
+    @Override
+    public boolean havePlayedAgainstEachOther(Player player1, Player player2, List<Game> playedGames) {
        
      return playedGames.stream()
             .anyMatch(game -> (game.getWhite().equals(player1) && game.getBlack().equals(player2)) ||
@@ -183,7 +195,8 @@ public class TournamentServiceImpl implements TournamentService{
     }
 
 
-    private boolean alreadyThere(Game last, ArrayList<Game> helpList) {
+    @Override
+    public boolean alreadyThere(Game last, ArrayList<Game> helpList) {
         for (Game game : helpList) {
                     if (game.getWhite()==last.getBlack() || game.getBlack()==last.getWhite()||game.getWhite()==last.getWhite()||game.getBlack()==last.getBlack()) return true;
                     
