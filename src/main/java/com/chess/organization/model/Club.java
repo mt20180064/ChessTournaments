@@ -4,6 +4,10 @@
  */
 package com.chess.organization.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 
 
 /**
@@ -11,15 +15,27 @@ package com.chess.organization.model;
  * @author Milena Kutch
  */
 
+@Entity
+@Table(name="club-spring")
 public class Club extends Institution{
     
-    
-private final String tip;
+    @Column (name="tip")
+private  String tip;
 
     public Club(Builder builder) {
         super(builder);
         this.tip=builder.tip;
     }
+
+    public Club() {
+        
+    }
+
+    public Club(String tip) {
+        this.tip = tip;
+    }
+
+    
     public static class Builder extends Institution.Builder<Builder> {
 
         

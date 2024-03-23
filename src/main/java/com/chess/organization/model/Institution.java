@@ -4,6 +4,13 @@
  */
 package com.chess.organization.model;
 
+import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
 
 
 
@@ -11,21 +18,31 @@ package com.chess.organization.model;
  *
  * @author user
  */
+@MappedSuperclass
 public abstract class Institution {
-    private final Long id;
-    private final String naziv;
-    private final String grad;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name="id")
+    private  Long id;
+    @Column (name = "naziv")
+    private  String naziv;
+    @Column (name = "grad")
+    private  String grad;
     
     public Institution(Builder builder) {
         this.id = builder.id;
         this.naziv = builder.naziv;
         this.grad = builder.grad;
     }
+
+    public Institution() {
+        
+    }
     
     public abstract static class Builder<T extends Builder<T>> {
 
-        private final Long id;
-        private final String naziv;
+        private  Long id;
+        private  String naziv;
         private String grad;
        
 
