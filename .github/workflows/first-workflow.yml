@@ -1,5 +1,5 @@
 name: info checker on starting the app
-on: [push, pull request]
+on: [push, pull_request]
 jobs:
   Start:
      runs-on: ubuntu-latest

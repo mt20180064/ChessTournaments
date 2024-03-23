@@ -1,5 +1,6 @@
 name: cache dependencies and do mvn clean install
-on:[push]
+on:
+ push:
 jobs:
   build:
     runs-on: ubuntu-latest
