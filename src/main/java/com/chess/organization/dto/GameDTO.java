@@ -70,5 +70,8 @@ public class GameDTO {
         this.tableNumber = tableNumber;
     }
 
+    public GameDTO() {
+    }
+
     
 }

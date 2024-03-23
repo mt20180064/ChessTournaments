@@ -63,7 +63,8 @@ public class PlayerController {
                if (!players.contains(listOfReg.getPlayerID())){
                    players.add(listOfReg.getPlayerID());
                }
-           }
+          
+               }
         return players;
     }
     @GetMapping("/pair")

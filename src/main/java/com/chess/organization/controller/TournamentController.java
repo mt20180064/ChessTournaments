@@ -6,6 +6,7 @@ package com.chess.organization.controller;
 
 import com.chess.organization.dto.GameDTO;
 import com.chess.organization.model.Game;
+import com.chess.organization.model.Player;
 
 
 import com.chess.organization.model.Tournament;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -42,6 +44,7 @@ public class TournamentController {
         return tournamentService.findAll();
     }
     
+   
       @GetMapping("/pairNextRound")
     public ResponseEntity<?> pairNextRound(@RequestParam Long tournamentId) {
         try {
@@ -53,7 +56,7 @@ public class TournamentController {
         }
     }
     @PostMapping("/submitRoundResults")
-public ResponseEntity<?> submitRoundResults(@RequestBody List<GameDTO> gameResults, @RequestParam Long tournamentId) {
+    public ResponseEntity<?> submitRoundResults(@RequestBody List<GameDTO> gameResults, @RequestParam Long tournamentId) {
     try {
         tournamentService.processRoundResults(gameResults, tournamentId);
         return ResponseEntity.ok().build();
@@ -71,11 +74,13 @@ public ResponseEntity<Tournament> updateStatus (@RequestParam Long tournamentId)
     return new ResponseEntity<>(tournamentUpdated, HttpStatus.OK);
 }
 
-@PostMapping("/new-tournament")
-public ResponseEntity<Tournament> save (@RequestBody Tournament tournament) throws Exception {
-        Tournament tournament1= tournamentService.findById(tournament.getId());
-  
-    Tournament tour = tournamentService.save(tournament1);
-    return new ResponseEntity<>(tour, HttpStatus.CREATED);
-}
+
+@PostMapping("/save")
+	public @ResponseBody ResponseEntity<Tournament> save(@RequestBody Tournament t) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(tournamentService.save(t));
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+	}
 }

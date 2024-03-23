@@ -96,8 +96,10 @@ public class TournamentServiceImpl implements TournamentService{
     public List<Game> pairNextRound(Long tournamentId) throws Exception {
         int tableNumber = 1;
     List<Player> players = getPlayersForTournament(tournamentId);
+       
     List<Game> playedGames = getGamesPlayedOnTournament (tournamentId);
     players.sort(Comparator.comparing(Player::getPoints).reversed());
+     
    ArrayList<Player> pla= new ArrayList<>();
                     ArrayList<Game> helpList=new ArrayList<>();
                      for (Player player : players) {
@@ -158,6 +160,7 @@ public class TournamentServiceImpl implements TournamentService{
     public List<Player> getPlayersForTournament(Long tournamentId)  {
         try {
             Tournament t =findById(tournamentId);
+            System.out.println(t.getName());
             LinkedList<Player> players = new LinkedList<>();
             
             
@@ -167,6 +170,7 @@ public class TournamentServiceImpl implements TournamentService{
                     players.add(listOfReg.getPlayerID());
                 }
             }
+            System.out.println(players);
             return players;
         } catch (Exception ex) {
             Logger.getLogger(TournamentServiceImpl.class.getName()).log(Level.SEVERE, null, ex);

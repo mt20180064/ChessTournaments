@@ -16,7 +16,7 @@ public interface PlayerService {
      Player save (Player player);
     List<Player> findAll();
     void delete (Long id);
-   Optional<Player> findById (Long id);
+   Player findById (Long id) throws Exception;
    Player saveUnique(Player player);
    Player findByUsername (String username);
 

@@ -16,6 +16,9 @@ import com.chess.organization.repository.RefereeRepository;
 import com.chess.organization.repository.RegistrationRepository;
 import com.chess.organization.repository.TournamentRepository;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -30,9 +34,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.mock;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -233,7 +240,7 @@ public void findByIdThrowsExceptionWhenNotFoundTest() {
     }
     
     @Test
-    public void getGamesPlayedOnTournamentReturnsGamesList() throws Exception {
+    public void getGamesPlayedOnTournamentReturnsGamesListTest() throws Exception {
         
         Long tournamentId = 1L;
         Tournament tournament = new Tournament(tournamentId);
@@ -249,29 +256,26 @@ public void findByIdThrowsExceptionWhenNotFoundTest() {
         assertEquals(expectedGames, actualGames, "The returned games list should match the expected list");
     }
     
-   /*@Test
-    public void processRoundResultsUsingCsvDataTest() throws Exception {
-        Long tournamentId = 1L;
-      
-        File csvFile = Paths.get("src/main/resources/games.csv").toFile();
+    
+      @ParameterizedTest
+    @CsvFileSource(resources = "/games.csv", numLinesToSkip = 1, delimiter = ';')
+    public void processRoundResultsUsingCsvDataTest(Long whitePlayerId, Long blackPlayerId, double pointsWhite, double pointsBlack) {
+        // Given
+        Long tournamentId = 1L; 
+        when(tournamentRepository.findById(tournamentId)).thenReturn(Optional.of(mock(Tournament.class)));
+        when(playerRepository.findById(whitePlayerId)).thenReturn(Optional.of(mock(Player.class)));
+        when(playerRepository.findById(blackPlayerId)).thenReturn(Optional.of(mock(Player.class)));
+
         List<GameDTO> gameDTOs = new ArrayList<>();
-        try (Scanner scanner = new Scanner(csvFile)) {
-            scanner.nextLine(); 
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] data = line.split(";");
-                Long whitePlayerId = Long.valueOf(data[0].trim());
-                Long blackPlayerId = Long.valueOf(data[1].trim());
-                double pointsWhite = Double.parseDouble(data[2].trim());
-                double pointsBlack = Double.parseDouble(data[3].trim());
-                GameDTO gameDTO = new GameDTO(whitePlayerId, blackPlayerId, pointsWhite, pointsBlack);
-                gameDTOs.add(gameDTO);
-            }
-           
-        }
+        GameDTO gameDTO = new GameDTO(whitePlayerId, blackPlayerId, pointsWhite, pointsBlack);
+        gameDTOs.add(gameDTO);
 
         tournamentService.processRoundResults(gameDTOs, tournamentId);
+
+
         verify(gameRepository, times(1)).saveAll(any());
-        
-    }*/
+    }
+    
+    
+    
 }

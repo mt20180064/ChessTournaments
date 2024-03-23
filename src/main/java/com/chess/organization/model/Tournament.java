@@ -75,6 +75,18 @@ public class Tournament {
         this.region = region;
     }
 
+    public Tournament(Long id, String name, String status, Referee referee) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.referee=referee;
+    }
+  public Tournament(Long id, String name, String status) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        
+    }
     public Tournament(Long id, String name, String place, String type, String pace, String status, Referee referee, String region) {
         this.id = id;
         this.name = name;

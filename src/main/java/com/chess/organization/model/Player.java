@@ -74,6 +74,11 @@ public class Player {
     public Player(Long id) {
         this.id = id;
     }
+
+    public Player(Long id, double points) {
+        this.id = id;
+        this.points = points;
+    }
     
     
 

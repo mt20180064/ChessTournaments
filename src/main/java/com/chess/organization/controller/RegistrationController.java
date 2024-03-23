@@ -44,14 +44,12 @@ public class RegistrationController {
    }
    
    @GetMapping ("/playersTournaments")
-   public List<Registration> getForPlayer (@RequestParam Long playerId){
-       Optional<Player> p = playerService.findById(playerId);
-       if (p.isPresent()){
-           Player pp=p.get();
-           return registrationService.findByPlayerID(pp);
+   public List<Registration> getForPlayer (@RequestParam Long playerId) throws Exception{
+       Player p = playerService.findById(playerId);
+           return registrationService.findByPlayerID(p);
        }
-       return null;
-   }
+       
+   
    
    /*@GetMapping("/tournamentPlayers")
    public List<Registration> getForTournament (@RequestParam Long tournamentId){
