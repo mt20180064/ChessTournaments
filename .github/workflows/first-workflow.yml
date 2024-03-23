@@ -1,15 +1,18 @@
 name: info checker on starting the app
+
 on: [push, pull_request]
+
 jobs:
   Start:
-     runs-on: ubuntu-latest
-     steps: 
-       - run: echo "This is automatically triggered job by a ${{github.event_name}}
-       - run: echo "OS is ${{ runner.os }}"
-       - run: echo "URL is ${{ vars.URL }}"
-       - run: echo "Branch is ${{ github.ref }} on repository ${{ github.repository }}"
-       - name: Checkout repository code
-         uses: actions/checkout@v4
-       - run: echo "The repo ${{ github.repository }} has been cloned"
-       - run: echo "Job status is ${{ job.status }}"
+    runs-on: ubuntu-latest
+    steps: 
+      - run: echo "This is automatically triggered job by a ${{ github.event_name }}"
+      - run: echo "OS is ${{ runner.os }}"
+      - run: echo "URL is ${{ env.URL }}"
+      - run: echo "Branch is ${{ github.ref }} on repository ${{ github.repository }}"
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+      - run: echo "The repo ${{ github.repository }} has been cloned"
+      - run: echo "Job status is ${{ job.status }}"
+
 
