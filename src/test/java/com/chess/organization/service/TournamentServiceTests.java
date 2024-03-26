@@ -70,8 +70,7 @@ public class TournamentServiceTests {
     @MockBean
     private PlayerRepository playerRepository;
     
-    @MockBean
-    private RefereeService refereeService;
+ 
     
     @MockBean
     private GameRepository gameRepository;
@@ -93,7 +92,6 @@ public class TournamentServiceTests {
         @Test
 public void saveFailureBecauseNameIsNullTest() {
     Tournament t = new Tournament(3L, null, "belgrade", "kategorni", "1h", "aktivan", "balkan");
- 
     assertThrows(Exception.class, () -> {
         tournamentService.saveUnique(t);
     });
@@ -108,8 +106,7 @@ public void saveFailureBecauseRefereeDoesNotExistTest() {
     Tournament tournamentWithInvalidReferee = new Tournament(2L, "Tournament Name", "Location", "Category", "Duration", "Status", nonExistentReferee, "Region");
 
     when(refereeRepository.findById(nonExistentRefereeId)).thenReturn(Optional.empty());
-    
-    assertThrows(Exception.class, () -> {
+     assertThrows(Exception.class, () -> {
         tournamentService.save(tournamentWithInvalidReferee);
     });
 }
@@ -184,9 +181,9 @@ public void getPlayersForTournamentTest(Long tournamentid, Long playerid) {
         
         List<Player> players = tournamentService.getPlayersForTournament(tournamentId);
         
-        assertEquals(2, players.size(), "Duplicate players should be removed.");
-        assertTrue(players.contains(player1), "The list should contain player 1.");
-        assertTrue(players.contains(player2), "The list should contain player 2.");
+        assertEquals(2, players.size(), "this is the size of a list of unique players.");
+        assertTrue(players.contains(player1), "player 1 is registrated twice but is returned only once.");
+        assertTrue(players.contains(player2), "player 2 is registrated once so he stays.");
     }
 @Test
 public void findByIdSuccessTest() throws Exception {
@@ -253,7 +250,7 @@ public void findByIdThrowsExceptionWhenNotFoundTest() {
 
         
         List<Game> actualGames = tournamentService.getGamesPlayedOnTournament(tournamentId);
-        assertEquals(expectedGames, actualGames, "The returned games list should match the expected list");
+        assertEquals(expectedGames, actualGames, "atual and expected lists should match");
     }
     
     

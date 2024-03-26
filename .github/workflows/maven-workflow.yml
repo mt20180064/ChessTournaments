@@ -25,4 +25,4 @@ jobs:
           java-version: '17'
 
       - name: Build with maven (skip tests)
-        run: mvn clean install -DskipTests
+        run: mvn clean install

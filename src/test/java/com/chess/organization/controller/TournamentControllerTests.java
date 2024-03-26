@@ -45,8 +45,7 @@ public class TournamentControllerTests {
     @MockBean
     private TournamentService tournamentService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    
     
 @Test
 public void updateStatusSuccessTest() throws Exception {
